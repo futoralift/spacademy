@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: sf_backend
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+      - backend_venv:/app/.venv
+    ports:
+      - "8001:8000"
+    command: sh -c "uv sync && PYTHONPATH=/app python scripts/init_db.py && uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    depends_on:
+      - redis
+      - postgres
+
+  frontend:
+    build: ./frontend
+    container_name: sf_frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5174:80"
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:8.6
+    container_name: sf_redis
+    ports:
+      - "6380:6379"
+
+  postgres:
+    image: postgres:16
+    container_name: sf_postgres
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=${PG_DB}
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASS}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  backend_venv:
