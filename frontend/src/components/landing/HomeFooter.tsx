@@ -11,6 +11,7 @@ const footerLinks = [
       { name: "Courses", href: "/course" },
       { name: "About Us", href: "/about" },
       { name: "Blog", href: "/blog" },
+      { name: "Subscription Plans", href: "/subscription" },
       { name: "Contact Us", href: "/contact" },
     ],
   },

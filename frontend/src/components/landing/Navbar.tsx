@@ -12,6 +12,7 @@ const navLinks = [
     { name: "Courses", href: "/course" },
     { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
+    { name: "Subscription", href: "/subscription" },
     { name: "Contact", href: "/contact" },
 ];
 

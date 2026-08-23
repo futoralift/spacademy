@@ -53,6 +53,7 @@ import BlogDetailPage from "./pages/BlogDetail.tsx";
 import AboutPage from "./pages/About.tsx";
 import ContactPage from "./pages/Contact.tsx";
 import CourseDetailPage from "./pages/CourseDetail.tsx";
+import SubscriptionPage from "./pages/Subscription.tsx";
 import NotFoundPage from "@/pages/NotFound.tsx";
 
 function App() {
@@ -66,6 +67,9 @@ function App() {
       <Route path="/blog/:id" element={<BlogDetailPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/subscription" element={<SubscriptionPage />} />
+      <Route path="/subscriptions" element={<SubscriptionPage />} />
+      <Route path="/pricing" element={<SubscriptionPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/signup/otp" element={<SignupOtpPage />} />
       <Route path="/login" element={<LoginPage />} />
