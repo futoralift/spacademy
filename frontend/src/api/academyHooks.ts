@@ -1043,7 +1043,7 @@ export function useUpdateLearningHubVideoMutation() {
         return await academyApi.updateLearningHubVideo(payload);
       } catch {
         const idx = mockStore.learningHubVideos.findIndex((v) => v.id === payload.id);
-        if (idx !== -1) mockStore.learningHubVideos[idx] = { ...mockStore.learningHubVideos[idx], ...payload };
+        if (idx !== -1) mockStore.learningHubVideos[idx] = { ...mockStore.learningHubVideos[idx], ...payload } as any;
         return mockStore.learningHubVideos.find((v) => v.id === payload.id)!;
       }
     },
@@ -1234,7 +1234,7 @@ export function useUpdateAnnouncementMutation() {
         return await academyApi.updateAnnouncement(payload);
       } catch {
         const idx = mockStore.announcements.findIndex((a) => a.id === payload.id);
-        if (idx !== -1) mockStore.announcements[idx] = { ...mockStore.announcements[idx], ...payload };
+        if (idx !== -1) mockStore.announcements[idx] = { ...mockStore.announcements[idx], ...payload } as any;
         return mockStore.announcements.find((a) => a.id === payload.id)!;
       }
     },

@@ -237,8 +237,8 @@ function EnquiryCard({ enquiry }: { enquiry: EnquiryResponse }) {
   const handleStatusChange = async (newStatus: EnquiryStatus) => {
     try {
       await statusMutation.mutateAsync({
-        enquiryId: enquiry.id,
-        payload: { status: newStatus },
+        id: enquiry.id,
+        status: newStatus,
       });
       toast.success(`Status updated to ${newStatus}`);
     } catch {
