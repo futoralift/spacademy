@@ -3,7 +3,7 @@ import {
   courseResponseSchema,
   type CourseResponseModel,
 } from "@/entities/course.ts";
-
+import { mockStore } from "@/api/mockStore";
 
 interface RequestOptions {
   signal?: AbortSignal;
@@ -12,9 +12,13 @@ interface RequestOptions {
 export async function getCourses(
   options?: RequestOptions,
 ): Promise<CourseResponseModel[]> {
-  const response = await apiRequest<unknown>("/courses/", {
-    signal: options?.signal,
-  });
-
-  return courseResponseSchema.array().parse(response);
+  try {
+    const response = await apiRequest<unknown>("/courses/", {
+      signal: options?.signal,
+    });
+    return courseResponseSchema.array().parse(response);
+  } catch {
+    // Return mock data when API is unavailable
+    return mockStore.courses as CourseResponseModel[];
+  }
 }

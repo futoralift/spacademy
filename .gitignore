@@ -20,7 +20,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 backend/sv_logger.log*
-backend/storage/
+# Keep the storage directory structure but ignore uploaded content
+backend/storage/*
+!backend/storage/.gitkeep
 backend/logs/
 backend/sample.py
 

@@ -23,6 +23,7 @@ class UserModel(BaseModel):
     deletedAt: Optional[datetime]
     lastLogIn: Optional[datetime]
 
+
 class PendingUserModel(BaseModel):
     id: uuid.UUID
     firstName: str
@@ -32,11 +33,3 @@ class PendingUserModel(BaseModel):
     authServiceProvider: AuthServiceProvider
     role: UserRole
     phone: str
-
-
-class TodoModel(BaseModel):
-    id: uuid.UUID
-    title: str
-    priority: int
-    isActive: bool
-    dueDate: datetime

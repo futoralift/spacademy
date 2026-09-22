@@ -1,7 +1,7 @@
-import {Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-function DashboardPage(){
-    return <Navigate to="/dashboard/admin/overview" replace />;
+function DashboardPage() {
+  return <Navigate to="/dashboard/admin/overview" replace />;
 }
 
 export default DashboardPage;

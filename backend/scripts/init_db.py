@@ -1,4 +1,5 @@
 import asyncio
+import os
 import socket
 
 from sqlalchemy import text
@@ -57,6 +58,29 @@ async def ensure_database_exists() -> None:
     finally:
         await maintenance_engine.dispose()
 
+
+def ensure_storage_directories() -> None:
+    """Create required local storage directories if they do not exist."""
+    storage_dirs = [
+        "storage",
+        "storage/sr",
+        "storage/assignment",
+        "storage/learning_hub",
+        "storage/announcement",
+        "storage/media_library",
+        "storage/blog",
+        "storage/student",
+        "storage/event",
+        "storage/course",
+        "storage/test",
+        "storage/testimonial",
+        "logs",
+    ]
+    for directory in storage_dirs:
+        os.makedirs(directory, exist_ok=True)
+    print("Storage directories verified/created.")
+
+
 async def init():
     await ensure_database_exists()
 
@@ -65,6 +89,8 @@ async def init():
 
     await engine.dispose()
     print("Database tables created successfully.")
+
+    ensure_storage_directories()
 
 
 if __name__ == "__main__":

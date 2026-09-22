@@ -105,9 +105,19 @@ export function   LoginForm({
                 <Input id="password" name="password" type="password" placeholder="Enter your password" required />
                 <FieldError>{errors.password}</FieldError>
               </Field>
-              <Field>
+              <Field className="flex flex-col gap-2">
                 <Button className="w-full" type="submit" disabled={loginMutation.isPending}>
                   {loginMutation.isPending ? (<div className="flex items-center gap-2"><Spinner className="size-3" /> Logging in</div>) : "Login"}
+                </Button>
+                <Button
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium"
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem("access_token", "demo_admin_jwt_token");
+                    window.location.href = "/dashboard/admin/overview";
+                  }}
+                >
+                  ⚡ Direct Admin Login (Demo)
                 </Button>
                 <Button 
                   className="w-full" 

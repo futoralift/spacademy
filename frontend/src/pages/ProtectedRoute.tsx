@@ -1,12 +1,15 @@
-import {type ReactNode} from "react";
+import { type ReactNode } from "react";
 
 interface ProtectedRouteProps {
-    children: ReactNode;
-    role?: string;
+  children: ReactNode;
+  role?: string;
 }
 
-function ProtectedRoute({children}: ProtectedRouteProps) {
-    return <>{children}</>;
+/**
+ * Clean pass-through route wrapper allowing direct access to all dashboard portals.
+ */
+function ProtectedRoute({ children }: ProtectedRouteProps) {
+  return <>{children}</>;
 }
 
 export default ProtectedRoute;
