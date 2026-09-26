@@ -108,7 +108,7 @@ export default function BlogDetailPage() {
                     <User className="size-6 text-primary" />
                   </div>
                   <div>
-                    <span className="block font-bold text-lg">SF Academy</span>
+                    <span className="block font-bold text-lg">The Champions Academy</span>
                     <span className="text-sm text-muted-foreground italic">Admin</span>
                   </div>
                 </div>

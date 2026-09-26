@@ -69,9 +69,9 @@ export default function TeacherSidebar() {
             {/* ── Logo Header ── */}
             <SidebarHeader className="px-4 py-4 border-b border-sidebar-border">
                 <Link to="/" className="flex items-center gap-3">
-                    <img src="/images/logo.png" alt="SF Academy Logo" className="w-9 h-9 rounded-full object-cover shadow-md" />
+                    <img src="/images/logo.png" alt="The Champions Academy Logo" className="w-9 h-9 rounded-full object-cover shadow-md" />
                     <div className="flex flex-col leading-none">
-                        <span className="text-foreground font-bold text-sm tracking-wide">SF Academy</span>
+                        <span className="text-foreground font-bold text-sm tracking-wide">The Champions Academy</span>
                         <span className="text-muted-foreground text-[10px] font-medium">Teacher Portal</span>
                     </div>
                 </Link>

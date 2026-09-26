@@ -32,11 +32,11 @@ async def _get_or_create_site_settings(db: AsyncSession) -> SiteSettings:
     if settings is None:
         from datetime import datetime
         settings = SiteSettings(
-            academyName="SF Academy",
+            academyName="The Champions Academy",
             tagline="Excellence in Education",
             contactDetails="Contact us for more information",
             phoneNumbers=["+91 1234567890"],
-            email="info@sfacademy.com",
+            email="info@thechampionsacademy.com",
             address="Academy Address",
             workingHours="Mon-Sat: 9 AM - 6 PM",
             createdAt=datetime.now(),

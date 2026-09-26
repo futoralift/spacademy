@@ -80,7 +80,7 @@ export default function AboutPage() {
                 </h2>
 
                 <p className="font-sans text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
-                  SF Academy is a student-focused educational institute committed to building strong conceptual foundations in Mathematics and Science.
+                  The Champions Academy is a student-focused educational institute committed to building strong conceptual foundations in Mathematics and Science.
                 </p>
                 <p className="font-sans text-muted-foreground text-sm md:text-base leading-relaxed mb-10">
                   Established in 2013, the academy has been guiding students with a clear philosophy that real learning happens when students truly understand concepts rather than memorizing answers.

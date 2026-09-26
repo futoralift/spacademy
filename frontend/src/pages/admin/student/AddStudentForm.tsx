@@ -18,23 +18,27 @@ import { Input } from "@/components/ui/input.tsx";
 import { Spinner } from "@/components/ui/spinner.tsx";
 import { useCreateStudentMutation } from "@/api/userHooks.ts";
 import type { StudentRequest } from "@/api/types.ts";
-import { useCourses } from "@/hooks/api/useCourses.ts";
+import { useCoursesQuery } from "@/api/academyHooks.ts";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
 import { Badge } from "@/components/ui/badge.tsx";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select.tsx";
+import { toast } from "sonner";
 
 const DEFAULT_STUDENT_AVATAR = "storage/profile-placeholder.png";
 
 export default function AddStudentForm() {
     const [open, setOpen] = useState(false);
     const [courseIds, setCourseIds] = useState<string[]>([]);
+    const [standard, setStandard] = useState<string>("10th");
     const createStudentMutation = useCreateStudentMutation();
-    const courses = useCourses();
+    const courses = useCoursesQuery();
 
     const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
 
-        if (courseIds.length === 0) {
+        const availableCourses = courses.data || [];
+        if (availableCourses.length > 0 && courseIds.length === 0) {
+            toast.error("Please select at least one course for the student");
             return;
         }
 
@@ -42,26 +46,31 @@ export default function AddStudentForm() {
         const formData = new FormData(form);
         const avatar = String(formData.get("avatar") ?? "").trim();
         const payload: StudentRequest = {
-            firstName: String(formData.get("firstName") ?? ""),
-            lastName: String(formData.get("lastName") ?? ""),
+            firstName: String(formData.get("firstName") ?? "").trim(),
+            lastName: String(formData.get("lastName") ?? "").trim(),
             avatar: avatar || DEFAULT_STUDENT_AVATAR,
-            email: String(formData.get("email") ?? ""),
-            phone: String(formData.get("phone") ?? ""),
+            email: String(formData.get("email") ?? "").trim(),
+            phone: String(formData.get("phone") ?? "").trim(),
             password: String(formData.get("password") ?? ""),
-            rollNo: String(formData.get("rollNo") ?? ""),
+            rollNo: String(formData.get("rollNo") ?? "").trim(),
             courseIds,
-            standard: String(formData.get("standard") ?? ""),
-            board: String(formData.get("board") ?? ""),
-            schoolName: String(formData.get("schoolName") ?? ""),
-            parentName: String(formData.get("parentName") ?? ""),
-            parentMobileNumber: String(formData.get("parentMobileNumber") ?? ""),
+            standard: standard || String(formData.get("standard") ?? "10th"),
+            board: String(formData.get("board") ?? "").trim(),
+            schoolName: String(formData.get("schoolName") ?? "").trim(),
+            parentName: String(formData.get("parentName") ?? "").trim(),
+            parentMobileNumber: String(formData.get("parentMobileNumber") ?? "").trim(),
         };
 
         createStudentMutation.mutate(payload, {
             onSuccess: () => {
+                toast.success("Student added successfully");
                 form.reset();
                 setCourseIds([]);
+                setStandard("10th");
                 setOpen(false);
+            },
+            onError: (err: any) => {
+                toast.error(err?.message || "Failed to add student");
             },
         });
     };
@@ -156,7 +165,7 @@ export default function AddStudentForm() {
                         </Field>
                         <Field>
                             <Label htmlFor="standard">Standard</Label>
-                            <Select name="standard">
+                            <Select name="standard" value={standard} onValueChange={setStandard}>
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select student standard" />
                                 </SelectTrigger>
@@ -171,7 +180,7 @@ export default function AddStudentForm() {
                         </Field>
                         <Field>
                             <Label htmlFor="board">Board</Label>
-                            <Input id="board" name="board" placeholder="Enter student board" required aria-label="board" />
+                            <Input id="board" name="board" placeholder="Enter student board (e.g. CBSE, ICSE, State)" required aria-label="board" />
                         </Field>
                         <Field>
                             <Label htmlFor="school-name">School Name</Label>
@@ -193,19 +202,19 @@ export default function AddStudentForm() {
                             />
                         </Field>
                         <Field className="sm:col-span-2">
-                            <Label htmlFor="avatar">Avatar URL</Label>
+                            <Label htmlFor="avatar">Avatar URL (Optional)</Label>
                             <Input
                                 id="avatar"
                                 name="avatar"
                                 placeholder={DEFAULT_STUDENT_AVATAR}
-                                value={DEFAULT_STUDENT_AVATAR}
+                                defaultValue={DEFAULT_STUDENT_AVATAR}
                                 aria-label="avatar"
                             />
                         </Field>
                     </FieldGroup>
                     {courseIds.length === 0 && (
                         <p className="text-center text-sm text-muted-foreground">
-                            Select at least one course before submitting. All other fields should match the student&apos;s official details.
+                            Please select enrolled course(s) above for this student.
                         </p>
                     )}
                     <DialogFooter>
@@ -214,7 +223,7 @@ export default function AddStudentForm() {
                         </DialogClose>
                         <Button
                             type="submit"
-                            disabled={createStudentMutation.isPending || courseIds.length === 0 || courses.isLoading}
+                            disabled={createStudentMutation.isPending}
                         >
                             {createStudentMutation.isPending ? "Adding..." : "Add Student"}
                         </Button>

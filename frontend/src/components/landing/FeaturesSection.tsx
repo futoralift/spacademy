@@ -62,7 +62,7 @@ export default function FeaturesSection() {
           <span className="font-sans text-xs font-bold uppercase tracking-widest text-brand-secondary block mb-3">Why Choose Us</span>
           <h2 className="font-serif text-3xl md:text-5xl font-bold text-brand-dark dark:text-white">
             Exceptional Features of <br />
-            <span className="text-brand-primary dark:text-brand-secondary italic">SF Academy</span>
+            <span className="text-brand-primary dark:text-brand-secondary italic">The Champions Academy</span>
           </h2>
         </div>
 

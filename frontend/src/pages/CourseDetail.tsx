@@ -121,7 +121,7 @@ export default function CourseDetail() {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_SfneqnAJbZH6d9", // Updated to match backend
         amount: order.amount,
         currency: order.currency,
-        name: "SF Academy",
+        name: "The Champions Academy",
         description: `Enrollment for ${course.name}`,
         order_id: order.id,
         handler: async (response: RazorpayResponse) => {

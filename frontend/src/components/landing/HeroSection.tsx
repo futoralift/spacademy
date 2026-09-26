@@ -38,7 +38,7 @@ export default function HeroSection() {
                         {/* Badge */}
                         <div className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-indigo-100 dark:border-indigo-900/40 mb-6">
                             <span className="size-1.5 rounded-full bg-indigo-500 animate-pulse" />
-                            SF Academy — Premier Coaching Institute
+                            The Champions Academy — Premier Coaching Institute
                         </div>
 
                         {/* Headline */}
@@ -50,7 +50,7 @@ export default function HeroSection() {
                         </h1>
 
                         <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 max-w-lg mb-6 leading-relaxed">
-                            SF Academy provides expert faculty, comprehensive courses, and 24/7 support to help students excel in every discipline.
+                            The Champions Academy provides expert faculty, comprehensive courses, and 24/7 support to help students excel in every discipline.
                         </p>
 
                         {/* Highlights */}
@@ -91,7 +91,7 @@ export default function HeroSection() {
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-indigo-100 dark:shadow-indigo-900/20 rotate-1 hover:rotate-0 transition-transform duration-500 w-full max-w-md">
                             <img
                                 src="/images/hero_student.png"
-                                alt="Student Studying at SF Academy"
+                                alt="Student Studying at The Champions Academy"
                                 className="w-full h-auto object-cover object-top"
                             />
                             {/* Overlay gradient */}

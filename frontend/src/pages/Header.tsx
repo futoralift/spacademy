@@ -40,7 +40,7 @@ export default function Header({ title }: HeaderProps) {
                 <div className="flex items-center gap-3">
                     <SidebarTrigger className="[&_svg]:size-5! text-muted-foreground hover:text-foreground transition-colors" />
                     <div className="hidden sm:flex items-center gap-2 text-sm">
-                        <span className="text-muted-foreground">SF Academy</span>
+                        <span className="text-muted-foreground">The Champions Academy</span>
                         <span className="text-muted-foreground/40">/</span>
                         <span className="font-semibold text-foreground">{title}</span>
                     </div>

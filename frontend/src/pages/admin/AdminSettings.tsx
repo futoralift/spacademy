@@ -145,7 +145,7 @@ export default function AdminSettingsPage() {
                       name="academyName"
                       value={formData.academyName}
                       onChange={handleInputChange}
-                      placeholder="e.g. SF Academy"
+                      placeholder="e.g. The Champions Academy"
                       required
                       aria-label="academy Name"
                     />

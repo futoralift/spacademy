@@ -431,11 +431,11 @@ export function useSiteSettingsQuery() {
       catch {
         return {
           id: "settings1",
-          academyName: "FutorAlift Academy",
+          academyName: "The Champions Academy",
           tagline: "Excellence in Education",
           contactDetails: "Contact us for admissions",
           phoneNumbers: ["+91 98765 43210"],
-          email: "info@futoralift.com",
+          email: "contact@thechampionsacademy.com",
           address: "123 Education Street, Knowledge City, India",
           workingHours: "Mon–Sat: 9 AM – 6 PM",
           instagram: null,

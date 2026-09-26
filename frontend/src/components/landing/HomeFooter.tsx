@@ -43,7 +43,7 @@ export default function HomeFooter() {
 
   const address = settings?.address || "123, Education Plaza, Pune, Maharashtra - 411001";
   const phone = settings?.phoneNumbers?.[0] || "";
-  const email = settings?.email || "contact@sfacademy.com";
+  const email = settings?.email || "contact@thechampionsacademy.com";
 
   return (
     <footer className="bg-[#0B2240] text-slate-300 pt-20 pb-10 relative overflow-hidden text-left">
@@ -57,8 +57,8 @@ export default function HomeFooter() {
           {/* Logo & Description Column */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <Link to="/" className="flex items-center gap-3">
-              <img src="/images/logo.png" alt="SF Academy Logo" className="h-11 w-11 rounded-full object-cover shadow-lg" />
-              <span className="font-sans font-bold text-base text-white tracking-wide">SF Academy</span>
+              <img src="/images/logo.png" alt="The Champions Academy Logo" className="h-11 w-11 rounded-full object-cover shadow-lg" />
+              <span className="font-sans font-bold text-base text-white tracking-wide">The Champions Academy</span>
             </Link>
 
             <p className="font-sans text-sm text-slate-400 max-w-sm leading-relaxed">
@@ -126,7 +126,7 @@ export default function HomeFooter() {
 
       {/* Divider */}
       <div className="border-t border-slate-800/80 container mx-auto px-4 md:px-8 py-6 mt-8 flex justify-center items-center text-xs text-slate-500">
-        <p>© {currentYear} SF Academy. All rights reserved.</p>
+        <p>© {currentYear} The Champions Academy. All rights reserved.</p>
       </div>
     </footer>
   );

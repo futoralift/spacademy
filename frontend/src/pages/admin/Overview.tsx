@@ -146,7 +146,7 @@ export default function AdminOverview(){
                 <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
                         <p className="text-indigo-100 text-sm font-medium mb-1">{greeting}, Admin 👋</p>
-                        <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight">Welcome to SF Academy</h1>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight">Welcome to The Champions Academy</h1>
                         <p className="text-indigo-200 text-sm mt-1">Here's what's happening across your platform today.</p>
                     </div>
                     <div className="flex gap-2">

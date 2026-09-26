@@ -228,7 +228,7 @@ export default function SubscriptionPage() {
 
   const openWhatsApp = (planName?: string) => {
     const text = encodeURIComponent(
-      `Hello SF Academy, I would like to inquire about the "${planName || "Subscription Plans"}". Please assist me.`
+      `Hello The Champions Academy, I would like to inquire about the "${planName || "Subscription Plans"}". Please assist me.`
     );
     window.open(`https://wa.me/${sanitizedPhone}?text=${text}`, "_blank");
   };

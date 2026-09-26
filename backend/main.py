@@ -78,8 +78,8 @@ def make_json_safe(value: Any) -> Any:
 # ── App ───────────────────────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="SF Academy API",
-    description="Backend API for the SF Academy LMS platform",
+    title="The Champions Academy API",
+    description="Backend API for The Champions Academy LMS platform",
     version="1.0.0",
     lifespan=lifespan,
 )

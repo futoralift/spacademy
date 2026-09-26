@@ -20,7 +20,7 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
     const { data: settings } = useSiteSettingsQuery();
-    const academyName = settings?.academyName || "SF Academy";
+    const academyName = settings?.academyName || "The Champions Academy";
 
     const isActive = (path: string) => {
         if (path === "/" && location.pathname !== "/") return false;
@@ -32,8 +32,8 @@ export default function Navbar() {
             <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6">
                 {/* Logo Section */}
                 <Link to="/" className="flex items-center gap-3">
-                    <img src="/images/logo.png" alt="SF Academy Logo" className="w-11 h-11 rounded-full object-cover shadow-md" />
-                    <span className="font-sans font-bold text-base tracking-wide text-gray-900 dark:text-white">SF Academy</span>
+                    <img src="/images/logo.png" alt="The Champions Academy Logo" className="w-11 h-11 rounded-full object-cover shadow-md" />
+                    <span className="font-sans font-bold text-base tracking-wide text-gray-900 dark:text-white">The Champions Academy</span>
                 </Link>
 
                 {/* Desktop Navigation */}

@@ -77,7 +77,7 @@ export const columns: ColumnDef<StudentResponse>[] = [
         id: "courses",
         header: "Courses",
         cell: ({ row }) => {
-            return <ExpandableList items={row.original.courses.map((course) => course.name)} limit={2} />
+            return <ExpandableList items={(row.original.courses ?? []).map((course) => course.name)} limit={2} />
         },
     },
     {

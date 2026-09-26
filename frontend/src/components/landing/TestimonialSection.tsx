@@ -7,7 +7,7 @@ const staticTestimonials = [
   {
     studentName: "Abhishek Kadam",
     courseName: "NEET 2023 - Score 685",
-    content: "The conceptual clarity I got at SF Academy was unparalleled. The faculty really takes the time to ensure every student understands the core principles before moving to advanced problems.",
+    content: "The conceptual clarity I got at The Champions Academy was unparalleled. The faculty really takes the time to ensure every student understands the core principles before moving to advanced problems.",
     avatar: "/images/faculty1.png",
   },
   {

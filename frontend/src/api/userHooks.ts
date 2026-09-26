@@ -159,43 +159,60 @@ export function useCreateStudentMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: Parameters<typeof usersApi.createStudent>[0]) => {
+      const selectedCourses = (payload.courseIds || [])
+        .map((id) => mockStore.courses.find((c) => c.id === id))
+        .filter(Boolean) as any[];
+
+      const studentItem: any = {
+        id: uuid(),
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        email: payload.email,
+        authServiceProvider: "app" as const,
+        studentNumber: payload.phone ?? "",
+        parentNumber: payload.parentMobileNumber ?? null,
+        parentName: payload.parentName ?? null,
+        board: payload.board ?? null,
+        schoolName: payload.schoolName ?? null,
+        avatar: payload.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${payload.firstName}`,
+        createdAt: now(),
+        lastLoginAt: null,
+        deletedAt: null,
+        rollNo: payload.rollNo ?? null,
+        standard: payload.standard ?? null,
+        courses: selectedCourses,
+      };
+
       try {
-        return await usersApi.createStudent(payload);
+        const res = await usersApi.createStudent(payload);
+        const createdStudent = {
+          ...studentItem,
+          ...(res as any),
+          courses: (res as any)?.courses?.length ? (res as any).courses : selectedCourses,
+        };
+        mockStore.students.unshift(createdStudent);
+        return createdStudent;
       } catch {
-        const studentItem = {
-          id: uuid(),
-          firstName: payload.firstName,
-          lastName: payload.lastName,
-          email: payload.email,
-          authServiceProvider: "app" as const,
-          studentNumber: payload.phone ?? "",
-          parentNumber: payload.parentMobileNumber ?? null,
-          parentName: payload.parentName ?? null,
-          board: payload.board ?? null,
-          schoolName: payload.schoolName ?? null,
-          avatar: payload.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${payload.firstName}`,
-          createdAt: now(),
-          lastLoginAt: null,
-          deletedAt: null,
-          rollNo: payload.rollNo ?? null,
-          standard: payload.standard ?? null,
-          courses: [],
-        };
-        mockStore.students.push(studentItem);
-        return {
-          id: studentItem.id,
-          firstName: studentItem.firstName,
-          lastName: studentItem.lastName,
-          email: studentItem.email,
-          phone: payload.phone ?? "",
-          avatar: studentItem.avatar,
-          role: "student" as const,
-          authServiceProvider: "app" as const,
-        };
+        // Offline / fallback creation
+        mockStore.students.unshift(studentItem);
+        return studentItem;
       }
     },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKeys.students.all });
+    onSuccess: (newStudent: any) => {
+      // Optimistically update all cached student list queries
+      queryClient.setQueriesData(
+        { queryKey: ["students", "list"] },
+        (old: any) => {
+          if (!old) return paginate([newStudent]);
+          return {
+            ...old,
+            data: [newStudent, ...(old.data || [])],
+            record: (old.record ?? 0) + 1,
+            totalRecord: (old.totalRecord ?? 0) + 1,
+          };
+        }
+      );
+      queryClient.invalidateQueries({ queryKey: queryKeys.students.all });
     },
   });
 }
@@ -228,8 +245,20 @@ export function useUpdateStudentMutation() {
         };
       }
     },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKeys.students.all });
+    onSuccess: (updatedStudent: any) => {
+      queryClient.setQueriesData(
+        { queryKey: ["students", "list"] },
+        (old: any) => {
+          if (!old || !old.data) return old;
+          return {
+            ...old,
+            data: old.data.map((s: any) =>
+              s.id === updatedStudent?.id ? { ...s, ...updatedStudent } : s
+            ),
+          };
+        }
+      );
+      queryClient.invalidateQueries({ queryKey: queryKeys.students.all });
     },
   });
 }
@@ -247,10 +276,17 @@ export function useDeleteStudentMutation() {
       }
     },
     onSuccess: (_d, studentUserId) => {
-      queryClient.setQueryData(
-        queryKeys.students.list({}),
-        (old: ReturnType<typeof paginate<(typeof mockStore.students)[0]>> | undefined) =>
-          old ? { ...old, data: old.data.filter((s) => s.id !== studentUserId) } : paginate([]),
+      queryClient.setQueriesData(
+        { queryKey: ["students", "list"] },
+        (old: any) => {
+          if (!old || !old.data) return old;
+          return {
+            ...old,
+            data: old.data.filter((s: any) => s.id !== studentUserId),
+            record: Math.max(0, (old.record ?? 1) - 1),
+            totalRecord: Math.max(0, (old.totalRecord ?? 1) - 1),
+          };
+        }
       );
       queryClient.invalidateQueries({ queryKey: queryKeys.students.all });
     },

@@ -36,7 +36,7 @@ export default function BlogsPage() {
               </div>
               <BlurFade delay={0.2}>
                 <p className="text-muted-foreground text-lg font-medium leading-relaxed">
-                  Insights, news, and academic advice from the experts at SF Academy.
+                  Insights, news, and academic advice from the experts at The Champions Academy.
                 </p>
               </BlurFade>
             </div>
@@ -62,7 +62,7 @@ export default function BlogsPage() {
                     <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
                       <div className="flex items-center gap-1.5">
                         <User className="size-3.5" />
-                        <span>SF Academy</span>
+                        <span>The Champions Academy</span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Calendar className="size-3.5" />

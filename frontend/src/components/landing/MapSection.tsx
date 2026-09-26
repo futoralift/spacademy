@@ -41,7 +41,7 @@ export default function MapSection() {
                     </div>
                     <div className="w-full lg:w-1/2 h-100 overflow-hidden hover:scale-[1.01] transition-all duration-100 rounded-xl relative group">
                         <iframe
-                            title="SF Academy Location"
+                            title="The Champions Academy Location"
                             src={mapSrc}
                             width="100%"
                             height="100%"
